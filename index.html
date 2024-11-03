@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Kontaktlista</title>
     <link rel="stylesheet" href="css/styles.css" />
-  </head>
-  <body>
-    <h1>Hello, World!</h1>
+</head>
+<body>
+    <h1>Skriv in din kontakt här!</h1>
+
+    <div class="container">
+        <form id="add-contact-form">
+            <input type="text" id="name" name="name" placeholder="Namn" required />
+            <input type="text" id="telefone" name="telefone" placeholder="Telefon" />
+            <button type="submit" id="createButton">Skapa</button>
+            <button type="button" id="deleteAllButton">Radera Alla</button>
+        </form>
+
+        <h1>Kontaktlista</h1>
+        <ul id="contactList"></ul>
+    </div>
+
     <script src="js/script.js"></script>
-  </body>
+</body>
 </html>
