@@ -19,17 +19,15 @@ function addContact() {
 
     updateContactList();
 
-
-    // Töm input-fälten
     nameInput.value = '';
     phoneInput.value = '';
 }
 
 function updateContactList() {
     const contactList = document.getElementById('contactList');
-    contactList.innerHTML = ''; // Rensa listan för fö
+    contactList.innerHTML = ''; 
 
-    // Loopa igenom alla kontakter i arrayen och skapa DOM-element för varje
+   
     contacts.forEach((contact, index) => {
         const listItem = document.createElement('li');
         listItem.className = 'contact-item';
@@ -46,13 +44,12 @@ function updateContactList() {
 
         const editButton = document.createElement('button');
         editButton.innerText = 'Ändra';
-        editButton.onclick = () => editContact(index); // TOD skapa funktionen till edit knappen
+        editButton.onclick = () => editContact(index, nameField, phoneField, editButton);
 
         const deleteButton = document.createElement('button');
         deleteButton.innerText = 'Radera';
         deleteButton.onclick = () => deleteContact(index); //TOD Skapa funktionen till knapp
 
-        // Lägg till elementen i listan
         listItem.appendChild(nameField);
         listItem.appendChild(phoneField);
         listItem.appendChild(editButton);
@@ -60,3 +57,22 @@ function updateContactList() {
         contactList.appendChild(listItem);
     });
 }
+
+function editContact(index, nameField, phoneField, editButton) {
+    if (editButton.innerText === 'Ändra') {
+        nameField.disabled = false;
+        phoneField.disabled = false;
+        editButton.innerText = 'Spara';
+    } else {
+        // Uppdatera arrayen med de nya värdena
+        contacts[index].name = nameField.value;
+        contacts[index].phone = phoneField.value;
+
+        nameField.disabled = true;
+        phoneField.disabled = true;
+        editButton.innerText = 'Ändra';
+
+        updateContactList(); // Uppdatera DOM efter att man har ändrat värderna
+    }
+}
+
