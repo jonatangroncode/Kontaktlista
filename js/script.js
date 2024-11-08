@@ -1,25 +1,26 @@
-const contacts = []; 
-
+const contacts = [];
 
 const registerForm = document.getElementById('add-contact-form');
 registerForm.addEventListener('submit', function(event) {
     event.preventDefault();
-    addContact();
+    if (validateInputs()) {
+        addContact();
+    }
 });
 
 const deleteAllBtn = document.getElementById('deleteAllButton');
 deleteAllBtn.addEventListener('click', deleteAllContacts);
 
-function addContact() {
+function validateInputs() {
+
     const nameInput = document.getElementById('name');
     const phoneInput = document.getElementById('telefone');
-
     let isValid = true;
 
     if (nameInput.value.trim() === '') {
         nameInput.classList.add('invalid');
         nameInput.placeholder = '* Skriv ett namn';
-        isValid = false; 
+        isValid = false;
     } else {
         nameInput.classList.remove('invalid');
     }
@@ -27,14 +28,18 @@ function addContact() {
     if (phoneInput.value.trim() === '') {
         phoneInput.classList.add('invalid');
         phoneInput.placeholder = '* Skriv telefonnummer';
-        isValid = false; 
+        isValid = false;
     } else {
         phoneInput.classList.remove('invalid');
     }
 
-    if (!isValid) {
-        return;
-    }
+    return isValid;
+}
+
+function addContact() {
+
+    const nameInput = document.getElementById('name');
+    const phoneInput = document.getElementById('telefone');
 
     const contact = {
         name: nameInput.value,
@@ -50,13 +55,11 @@ function addContact() {
     phoneInput.value = '';
 }
 
-
 function updateContactList() {
 
     const contactList = document.getElementById('contactList');
-    contactList.innerHTML = ''; 
+    contactList.innerHTML = '';
 
-   
     contacts.forEach((contact, index) => {
         const listItem = document.createElement('li');
         listItem.className = 'contact-item';
@@ -77,7 +80,7 @@ function updateContactList() {
 
         const deleteButton = document.createElement('button');
         deleteButton.innerText = 'Radera';
-        deleteButton.onclick = () => deleteContact(index); 
+        deleteButton.onclick = () => deleteContact(index);
 
         listItem.appendChild(nameField);
         listItem.appendChild(phoneField);
@@ -94,20 +97,8 @@ function editContact(index, nameField, phoneField, editButton) {
         phoneField.disabled = false;
         editButton.innerText = 'Spara';
     } else {
-        if (nameField.value.trim() === '') {
-            nameField.classList.add('invalid');
-            nameField.placeholder = '* Skriv ett namn';
-            return; 
-        } else {
-            nameField.classList.remove('invalid');
-        }
-
-        if (phoneField.value.trim() === '') {
-            phoneField.classList.add('invalid');
-            phoneField.placeholder = '* Skriv telefonnummer';
-            return; 
-        } else {
-            phoneField.classList.remove('invalid');
+        if (!validateEditInputs(nameField, phoneField)) {
+            return; // Avbryt om valideringen misslyckas
         }
 
         contacts[index].name = nameField.value;
@@ -117,29 +108,49 @@ function editContact(index, nameField, phoneField, editButton) {
         phoneField.disabled = true;
         editButton.innerText = 'Ändra';
 
-        updateContactList(); 
+        updateContactList();
     }
 }
 
+function validateEditInputs(nameField, phoneField) {
+
+    let isValid = true;
+
+    if (nameField.value.trim() === '') {
+        nameField.classList.add('invalid');
+        nameField.placeholder = '* Skriv ett namn';
+        isValid = false;
+    } else {
+        nameField.classList.remove('invalid');
+    }
+
+    if (phoneField.value.trim() === '') {
+        phoneField.classList.add('invalid');
+        phoneField.placeholder = '* Skriv telefonnummer';
+        isValid = false;
+    } else {
+        phoneField.classList.remove('invalid');
+    }
+
+    return isValid;
+}
 
 function deleteContact(index) {
 
     contacts.splice(index, 1); // Ta bort kontakten från arrayen
     updateContactList();
+
 }
 
-
 function deleteAllContacts() {
+
     if (confirm('Är du säker på att du vill radera alla kontakter?')) {
         contacts.length = 0; // Töm arrayen
-        updateContactList(); 
-        alert('Alla kontakter har raderats.');
-    } else {
-        alert('Radering avbröts.');
+        updateContactList();
     }
 }
 
-//TODO: validering ifyllda fält på editContact()
+
+//TODO: Bryt ut validering till egna funktioner 
 //TODO: lägg till validering att telefonnummer måste ha en viss struktur xxx-xxxxxxx
-//TODO: Ändra required på input för spara till snyggare validering
 //TODO: ändra alert till snyggare validering i deleteAllContacts()
