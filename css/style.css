@@ -1,5 +1,120 @@
 
+body {
+    background-color:rgb(42, 133, 136);
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.formatspan{
+    display: none;
+}
+
+input{
+    height: 30px;
+    font-size: 20px;
+    background-color: beige;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.input-container input {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+    border-radius: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  color: beige;
+  text-align: center;
+  margin: 50px;
+}
+
+input::placeholder {
+    color: grey; 
+    opacity: 1;
+}
+
+input.invalid::placeholder {
+    color: darkred;
+}
+
 .invalid {
     border: 2px solid red;
-    background-color: #ffe6e6;
+    background-color: beige;
+}
+
+li{
+    padding: 10px;;
+}
+
+button {
+    background-color: rgb(197, 195, 203);
+    border-radius: 10px;
+    height: 30px;
+    width: 100px;
+    color: darkblue;
+}
+
+.contact-list {
+    padding: 0;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 5px;
+    overflow-y: auto;
+    background-color:rgb(187, 170, 149);
+    max-width: 800px;
+    width: wrap;
+    border-radius: 20px;
+
+}
+
+.confirmbox {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.content-Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    margin: 5px;
 }

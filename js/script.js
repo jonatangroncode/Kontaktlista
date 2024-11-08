@@ -15,6 +15,8 @@ function validateInputs() {
 
     const nameInput = document.getElementById('name');
     const phoneInput = document.getElementById('telefone');
+    const formatSpanElement = document.getElementById('format-span');
+
     let isValid = true;
 
     if (nameInput.value.trim() === '') {
@@ -25,12 +27,16 @@ function validateInputs() {
         nameInput.classList.remove('invalid');
     }
 
-    if (phoneInput.value.trim() === '') {
+    const phonePattern = /^\d{3}-\d{7}$/; 
+    if (!phonePattern.test(phoneInput.value.trim())) {
         phoneInput.classList.add('invalid');
-        phoneInput.placeholder = '* Skriv telefonnummer';
+        phoneInput.placeholder = '* Telefon nummer';
+        formatSpanElement.style.display = 'block';
+        phoneInput.value = '';
         isValid = false;
     } else {
         phoneInput.classList.remove('invalid');
+        formatSpanElement.style.display = 'none';
     }
 
     return isValid;
@@ -143,14 +149,20 @@ function deleteContact(index) {
 }
 
 function deleteAllContacts() {
+    const confirmingbox = document.getElementById('deleteConfirmation');
+    const confirmDeleteButton = document.getElementById('confirmDeleteBtn');
+    const cancelDeleteButton = document.getElementById('cancelDeleteBtn');
 
-    if (confirm('Är du säker på att du vill radera alla kontakter?')) {
+  
+    confirmingbox.style.display = 'block';
+
+    confirmDeleteButton.onclick = () => {
         contacts.length = 0; // Töm arrayen
         updateContactList();
-    }
+        confirmingbox.style.display = 'none'; 
+    };
+
+    cancelDeleteButton.onclick = () => {
+        confirmingbox.style.display = 'none';
+    };
 }
-
-
-//TODO: Bryt ut validering till egna funktioner 
-//TODO: lägg till validering att telefonnummer måste ha en viss struktur xxx-xxxxxxx
-//TODO: ändra alert till snyggare validering i deleteAllContacts()

@@ -11,14 +11,26 @@
 
     <div class="container">
         <form id="add-contact-form">
+          <div class="input-container">
             <input type="text" id="name" name="name" placeholder="Namn"  />
             <input type="text" id="telefone" name="telefone" placeholder="Telefon" />
+            <span class="formatspan" id="format-span">* Format: xxx-xxxxxxx</span>
+          </div>
+          
             <button type="submit" id="createButton">Skapa</button>
             <button type="button" id="deleteAllButton">Radera Alla</button>
         </form>
 
-        <h1>Kontaktlista</h1>
-        <ul id="contactList"></ul>
+        <h1 class="rubrik">Kontaktlista</h1>
+        <ol id="contactList" class="contact-list"></ol>
+    </div>
+
+    <div id="deleteConfirmation" class="confirmbox">
+      <div class="content-Container">
+          <p>Är du säker på att du vill radera alla kontakter?</p>
+          <button id="confirmDeleteBtn">Ja</button>
+          <button id="cancelDeleteBtn">Nej</button>
+      </div>
     </div>
 
     <script src="js/script.js"></script>
