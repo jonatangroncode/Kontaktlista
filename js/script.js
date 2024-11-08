@@ -48,7 +48,7 @@ function updateContactList() {
 
         const deleteButton = document.createElement('button');
         deleteButton.innerText = 'Radera';
-        deleteButton.onclick = () => deleteContact(index); //TOD Skapa funktionen till knapp
+        deleteButton.onclick = () => deleteContact(index); 
 
         listItem.appendChild(nameField);
         listItem.appendChild(phoneField);
@@ -76,3 +76,10 @@ function editContact(index, nameField, phoneField, editButton) {
     }
 }
 
+function deleteContact(index) {
+    contacts.splice(index, 1); // Ta bort kontakten från arrayen
+    updateContactList(); // Uppdatera DOM eftersom arrayen har förändrats
+}
+
+
+//funktionalitet för att radera alla kontakter
